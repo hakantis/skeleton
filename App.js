@@ -9,6 +9,7 @@ import { ThemeContext } from './src/ContextProviders';
 import { DarkmodeSwitcher } from './src/components';
 import { useTranslation } from 'react-i18next';
 import * as Localization from 'expo-localization';
+import { setAsyncStorageData, getAsyncStorageData } from './src/storages';
 
 export default function App() {
   const [theme, setTheme] = useState('Light');
@@ -16,12 +17,22 @@ export default function App() {
   const themeData = { theme, setTheme, styles };
   const { t } = useTranslation();
 
-  // useEffect(() => {
-  //   // todo: save language in securestore in a new useeffect (only save if there is no lng yet) 
-  //   // and get the securestore language here. 
-  //   // if storageLanguage !== Localization.getLocales()[0].languageTag then render i18n.changeLanguage
-  //   i18n.changeLanguage(Localization.getLocales()[0].languageTag);
-  // }, [])
+  useEffect(() => {
+    const changeLanguage = async () => {
+      const systemSettingsLaguage = Localization.getLocales()[0].languageTag;
+      const storageLanguage = await getAsyncStorageData('defaultLng');
+      console.log(`system language is ${systemSettingsLaguage}`);
+      console.log(`storage language is ${storageLanguage}`);
+      if (storageLanguage === null || storageLanguage !== systemSettingsLaguage) {
+        console.log(`${systemSettingsLaguage} will be saved as default language`);
+        await setAsyncStorageData('defaultLng', systemSettingsLaguage);
+        console.log(`i18n language will be changed to ${systemSettingsLaguage}`);
+        i18n.changeLanguage(systemSettingsLaguage);
+      }
+    }
+
+    changeLanguage();
+  }, [])
 
   return (
     <ThemeContext.Provider value={themeData}>
