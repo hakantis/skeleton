@@ -10,6 +10,8 @@ import { DarkmodeSwitcher, ThemeSettings } from './src/components';
 import { useTranslation } from 'react-i18next';
 import * as Localization from 'expo-localization';
 import { setAsyncStorageData, getAsyncStorageData } from './src/storages';
+import { store } from './src/store';
+import { Provider } from 'react-redux';
 
 export default function App() {
   const [theme, setTheme] = useState(Appearance.getColorScheme());
@@ -67,17 +69,19 @@ export default function App() {
   }, [])
 
   return (
-    <ThemeContext.Provider value={themeData}>
-      <NavigationContainer>
-        <View style={[styles.container, { flex: 1, justifyContent: 'center', alignItems: 'center' }]}>
-          <Text style={styles.textColor}>Open up App.js to start working on your app!</Text>
-          <Text style={styles.textColor}>{t('test')}</Text>
-          <StatusBar style="auto" />
-          <DarkmodeSwitcher></DarkmodeSwitcher>
-          <ThemeSettings />
-        </View>
-      </NavigationContainer>
-    </ThemeContext.Provider>
+    <Provider store={store}>
+      <ThemeContext.Provider value={themeData}>
+        <NavigationContainer>
+          <View style={[styles.container, { flex: 1, justifyContent: 'center', alignItems: 'center' }]}>
+            <Text style={styles.textColor}>Open up App.js to start working on your app!</Text>
+            <Text style={styles.textColor}>{t('test')}</Text>
+            <StatusBar style="auto" />
+            <DarkmodeSwitcher></DarkmodeSwitcher>
+            <ThemeSettings />
+          </View>
+        </NavigationContainer>
+      </ThemeContext.Provider>
+    </Provider>
   );
 }
 
