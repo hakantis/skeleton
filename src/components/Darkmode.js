@@ -7,6 +7,6 @@ export const DarkmodeSwitcher = () => {
 
   return <Button
     title="Switch Theme"
-    onPress={() => setTheme(theme === 'Light' ? 'Dark' : 'Light')}
+    onPress={() => setTheme(theme === 'light' ? 'dark' : 'light')}
   />
 }
