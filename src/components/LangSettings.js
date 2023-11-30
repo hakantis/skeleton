@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setLangToStorage, setUseSystemLang } from '../slices/SystemSettingsSlice';
 import { useTranslation } from 'react-i18next';
 import { ModalView } from './Modal';
-import { Toggle, Select } from './index';
+import { Toggle } from './Toggle';
+import { Select } from './Select';
 
 export const LangSettings = () => {
   const [modalVisible, setModalVisible] = useState(false);

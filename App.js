@@ -21,11 +21,7 @@ export default function App() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log('SystemLang', Localization.getLocales()[0].languageTag)
-  }, [Localization.getLocales()[0].languageTag])
-
-  // // changes language if the system language is not like the language saved in storage
+  // changes language if the system language is not like the language saved in storage
   useEffect(() => {
     const changeLang = async () => {
       dispatch(!useSystemLangEnabled ? loadLang(appLang) : loadLang(systemLang));
