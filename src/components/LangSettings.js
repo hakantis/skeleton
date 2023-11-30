@@ -2,17 +2,18 @@ import { useState } from 'react';
 import { View } from 'react-native';
 import { Picker } from 'react-native-wheel-pick';
 import { useDispatch, useSelector } from 'react-redux';
-import { setThemeToStorage, setUseSystemTheme } from '../slices/SystemSettingsSlice';
+import { setLangToStorage, setUseSystemLang } from '../slices/SystemSettingsSlice';
 import { useTranslation } from 'react-i18next';
 import { ModalView } from './Modal';
 import { Toggle, Select } from './index';
 
-export const ThemeSettings = () => {
+export const LangSettings = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const { t } = useTranslation();
-  const useSystemThemeEnabled = useSelector((state) => state.settings.useSystemTheme);
-  const appTheme = useSelector((state) => state.settings.appTheme);
+  const useSystemLangEnabled = useSelector((state) => state.settings.useSystemLang);
+  const appLang = useSelector((state) => state.settings.appLang);
+  const systemLang = useSelector((state) => state.settings.systemLang);
   const styles = useSelector((state) => state.settings.styles);
   const dispatch = useDispatch();
 
@@ -22,23 +23,23 @@ export const ThemeSettings = () => {
 
   return <View style={{ flexDirection: 'column', alignItems: 'center', width: '100%', }}>
     <Toggle
-      title='Use System Theme'
-      onValueChange={() => dispatch(setUseSystemTheme(!useSystemThemeEnabled))}
-      value={useSystemThemeEnabled}
+      title='Use System Language'
+      onValueChange={() => dispatch(setUseSystemLang(!useSystemLangEnabled))}
+      value={useSystemLangEnabled}
     />
     <Select
-      title='Current Theme:'
+      title='Current Lang:'
       openModal={() => setModalVisible(true)}
-      currentSelection={appTheme}
+      currentSelection={appLang}
     />
     <ModalView modalVisible={modalVisible} closeModal={closeModal}>
       <Picker
         style={{ backgroundColor: 'white', width: '90%', height: '90%', borderRadius: 15 }}
-        selectedValue='Light'
-        pickerData={['Light', 'Dark']}
+        selectedValue='En'
+        pickerData={['En', 'De']}
         onValueChange={value => {
-          const themeMode = value.toLowerCase();
-          dispatch(setThemeToStorage(themeMode));
+          const lang = value.toLowerCase();
+          dispatch(setLangToStorage(lang));
           setModalVisible(false);
         }}
       />
