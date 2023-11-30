@@ -2,12 +2,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { Text, View, Appearance } from 'react-native';
-import { Darkmode, Lightmode } from './src/Theme';
-import { makeStyles } from './src/Stylesheet';
-import { DarkmodeSwitcher, ThemeSettings, LangSettings } from './src/components';
+import { ThemeSettings, LangSettings } from './src/components';
 import { useTranslation } from 'react-i18next';
 import * as Localization from 'expo-localization';
-import { setAsyncStorageData, getAsyncStorageData } from './src/storages';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadStyles, loadLang } from './src/slices/SystemSettingsSlice';
 
@@ -52,7 +49,6 @@ export default function App() {
         <Text style={styles.textColor}>Open up App.js to start working on your app!</Text>
         <Text style={styles.textColor}>{t('test')}</Text>
         <StatusBar style="auto" />
-        <DarkmodeSwitcher></DarkmodeSwitcher>
         <ThemeSettings />
         <LangSettings />
       </View>
