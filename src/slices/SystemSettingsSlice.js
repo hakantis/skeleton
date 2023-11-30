@@ -5,7 +5,6 @@ import * as Localization from 'expo-localization';
 import { getAsyncStorageData, setAsyncStorageData } from '../storages';
 import { makeStyles } from '../Stylesheet';
 import { Lightmode, Darkmode } from '../Theme';
-import Toast from 'react-native-toast-message';
 
 const settingsSlice = createSlice({
   name: "settings",
@@ -28,7 +27,7 @@ const settingsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getThemeFromStorage.pending, (state, action) => {
-      console.log('pending');
+      console.log('Loading Theme from storage');
     });
     builder.addCase(getThemeFromStorage.fulfilled, (state, action) => {
       state.appTheme = action.payload;
@@ -38,7 +37,7 @@ const settingsSlice = createSlice({
     });
     //------------------------------------------------------------------
     builder.addCase(setThemeToStorage.pending, (state, action) => {
-      console.log('pending');
+      console.log('Saving Theme in storage');
     });
     builder.addCase(setThemeToStorage.fulfilled, (state, action) => {
       state.appTheme = action.payload;
@@ -48,7 +47,7 @@ const settingsSlice = createSlice({
     });
     //------------------------------------------------------------------
     builder.addCase(getLangFromStorage.pending, (state, action) => {
-      console.log('pending');
+      console.log('Loading Lang from storage');
     });
     builder.addCase(getLangFromStorage.fulfilled, (state, action) => {
       state.appLang = action.payload;
@@ -58,7 +57,7 @@ const settingsSlice = createSlice({
     });
     //------------------------------------------------------------------
     builder.addCase(setLangToStorage.pending, (state, action) => {
-      console.log('pending');
+      console.log('Saving Lang to storage');
     });
     builder.addCase(setLangToStorage.fulfilled, (state, action) => {
       state.appLang = action.payload;
@@ -68,7 +67,7 @@ const settingsSlice = createSlice({
     });
     //------------------------------------------------------------------
     builder.addCase(isUseSystemTheme.pending, (state, action) => {
-      console.log('pending');
+      console.log('Loading Theme Setting Enable from Storage');
     });
     builder.addCase(isUseSystemTheme.fulfilled, (state, action) => {
       state.useSystemTheme = action.payload;
@@ -78,7 +77,7 @@ const settingsSlice = createSlice({
     });
     //------------------------------------------------------------------
     builder.addCase(setUseSystemTheme.pending, (state, action) => {
-      console.log('pending');
+      console.log('Saving Theme Setting Enable in storage');
     });
     builder.addCase(setUseSystemTheme.fulfilled, (state, action) => {
       state.useSystemTheme = action.payload;
@@ -88,7 +87,7 @@ const settingsSlice = createSlice({
     });
     //------------------------------------------------------------------
     builder.addCase(isUseSystemLang.pending, (state, action) => {
-      console.log('pending');
+      console.log('Loading Lang Setting Enable from Storage');
     });
     builder.addCase(isUseSystemLang.fulfilled, (state, action) => {
       state.useSystemLang = action.payload;
@@ -98,7 +97,7 @@ const settingsSlice = createSlice({
     });
     //------------------------------------------------------------------
     builder.addCase(setUseSystemLang.pending, (state, action) => {
-      console.log('pending');
+      console.log('Saving Lang Setting Enable in storage');
     });
     builder.addCase(setUseSystemLang.fulfilled, (state, action) => {
       state.useSystemLang = action.payload;

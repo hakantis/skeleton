@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import * as Localization from 'expo-localization';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadStyles, loadLang, isUseSystemLang, isUseSystemTheme } from './src/slices/SystemSettingsSlice';
+import { hideToast, showToast } from './src/helperfunctions';
 
 export default function App() {
   const { t } = useTranslation();
@@ -23,8 +24,15 @@ export default function App() {
 
   // first time load from storage if useSystemLang/Theme is enabled or disabled
   useEffect(() => {
+    showToast({
+      type: 'loader',
+      text1: 'Loading Theme and Language Setting from Storage',
+      autoHide: false,
+      topOffset: 150,
+    });
     dispatch(isUseSystemLang());
     dispatch(isUseSystemTheme());
+    hideToast();
   }, [])
 
   // changes language if the system language is not like the language saved in storage
