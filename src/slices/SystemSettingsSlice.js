@@ -5,6 +5,7 @@ import * as Localization from 'expo-localization';
 import { getAsyncStorageData, setAsyncStorageData } from '../storages';
 import { makeStyles } from '../Stylesheet';
 import { Lightmode, Darkmode } from '../Theme';
+import Toast from 'react-native-toast-message';
 
 const settingsSlice = createSlice({
   name: "settings",
